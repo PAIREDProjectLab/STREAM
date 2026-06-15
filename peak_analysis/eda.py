@@ -1521,3 +1521,67 @@ def plot_sensitivity_analysis_metrics(metrics, df):
         plt.show()
         
         
+
+
+# Example usage:
+#
+# data_root = "PATH_TO_DATA"
+# participant_id = "PARTICIPANT_ID"
+# base_folder = f"{data_root}/{participant_id}/STREAM{participant_id}_LongitudinalData"
+# all_sensor_dfs = process_patient_folder(base_folder, patient_id=participant_id)
+#
+# eda_df = all_sensor_dfs['eda']
+# eda_series = eda_df['value']
+#
+# temp_df = all_sensor_dfs['temperature']
+# temp_series = temp_df['value']
+#
+# steps_series = all_sensor_dfs['steps']
+#
+# diary_df = read_patient_diary("PATH_TO_DIARY", pat_id=participant_id)
+#
+# sleep_detection_df = all_sensor_dfs['sleep_detection']
+# sleep_summary_df = summarize_sleep_windows(
+#     sleep_detection_df,
+#     normal_start=time(21, 0),
+#     normal_end=time(9, 0),
+#     min_night_duration=timedelta(hours=3),
+#     max_start_gap=timedelta(hours=1)
+# )
+#
+# sleep_summary_df_w_diary = sleep_summary_w_pat_diary_status(
+#     diary_df,
+#     sleep_summary_df,
+#     pat_diary_cols_to_focus_on
+# )
+# plot_eda_temp_and_steps_with_detrends(
+#     sleep_detection_df,
+#     eda_series,
+#     temp_series,
+#     steps_series,
+#     sleep_summary_df
+# )
+#
+# eda_series_cleaned = clean_eda(
+#     eda_series,
+#     sleep_summary_df,
+#     sleep_detection_df,
+#     sampling_rate=4.0,
+#     use_hampel=False,
+#     hampel_window="30s",
+#     hampel_n_sigmas=3.0,
+#     use_chebyshev=True,
+#     cheb_coverage=0.95,
+#     short_artifact_duration="3m",
+#     mask_close_gaps="10m"
+# )
+#
+# plot_multiple_nights(eda_series, eda_series_cleaned, sleep_summary_df)
+# sensitivity_analysis_df = sensitivity_analysis(
+#     amp_vals,
+#     dist_vals,
+#     eda_series_cleaned,
+#     sleep_summary_df,
+#     sleep_summary_df_w_diary
+# )
+# sensitivity_analysis_nights_raw_w_diary_df = sensitivity_analysis_df['Nights with Diary Sensitivity DF']
