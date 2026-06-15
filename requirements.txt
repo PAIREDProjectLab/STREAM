@@ -1,0 +1,10 @@
+fastavro
+matplotlib
+neurokit2
+numpy
+openpyxl
+pandas
+plotly
+python-dateutil
+scipy
+tqdm
